@@ -78,6 +78,7 @@ const promise = new Promise((res, rej) => {
         res(1);
     }, 2000);
 });
+
 promise
     .then((res, rej) => {
         console.log(res);
