@@ -1,3 +1,5 @@
+/////////// ASYNC: NOW AND LATER /////////////
+
 var num;
 
 const getNum = () => {
@@ -12,6 +14,8 @@ const multBy4 = () => {
 };
 
 setTimeout(multBy4, 2000);
+
+//////////// CALLBACKS /////////////
 
 const getWords = () => {
     console.log('a word');
@@ -44,3 +48,47 @@ const countdown = (num, cb) => {
 const logDone = () => console.log('done');
 
 countdown(5, logDone);
+
+/////////////// PROMISES ///////////////////////
+
+const bool = true;
+
+const orderingChickenSandwich = new Promise((res, rej) => {
+    if (bool) {
+        const obj = { sandwich: 'chicken', veggies: 'lettuce' };
+        res(obj);
+    } else {
+        const err = new Error('not true');
+        rej(new Error(err));
+    }
+});
+
+const orderFood = () => {
+    orderingChickenSandwich
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+};
+
+orderFood();
+
+////////// CHAINING PROMISES /////////////
+
+const promise = new Promise((res, rej) => {
+    setTimeout(() => {
+        res(1);
+    }, 2000);
+});
+promise
+    .then((res, rej) => {
+        console.log(res);
+        return res * 2;
+    })
+    .then((res) => {
+        console.log(res);
+        return res * 4;
+    })
+    .then((res) => {
+        console.log(res);
+        return res * 6;
+    })
+    .then((res) => console.log(res));
